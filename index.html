@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub - Cloud Computing, AI & Blockchain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 5rem 0;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: #4ecdc4;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            background: #f8f9fa;
+            border-radius: 50px;
+            padding: 5px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Search */
+        .search-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #4ecdc4;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #4ecdc4;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4ecdc4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">🚀 TechHub</a>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                <li><a href="#cloud" onclick="scrollToSection('cloud')">Cloud Computing</a></li>
+                <li><a href="#ai" onclick="scrollToSection('ai')">AI</a></li>
+                <li><a href="#blockchain" onclick="scrollToSection('blockchain')">Blockchain</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Selamat Datang di Era Digital</h1>
+            <p>Jelajahi dunia Cloud Computing, Artificial Intelligence, dan Blockchain Technology</p>
+            <a href="#cloud" class="btn" onclick="scrollToSection('cloud')">Mulai Eksplorasi</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Search Section -->
+        <div class="search-container" style="padding-top: 2rem;">
+            <input type="text" id="searchBox" class="search-box" placeholder="🔍 Cari topik teknologi..." onkeyup="searchContent()">
+        </div>
+
+        <!-- Cloud Computing Section -->
+        <section id="cloud" class="section">
+            <h2>☁️ Cloud Computing</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('cloud-overview')">Overview</button>
+                <button class="tab-btn" onclick="showTab('cloud-types')">Jenis Cloud</button>
+                <button class="tab-btn" onclick="showTab('cloud-services')">Layanan</button>
+                <button class="tab-btn" onclick="showTab('cloud-benefits')">Manfaat</button>
+            </div>
+
+            <div id="cloud-overview" class="tab-content active">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🌐</span>
+                        <h3>Definisi Cloud Computing</h3>
+                        <p>Cloud computing adalah teknologi yang memungkinkan akses ke sumber daya komputasi (server, penyimpanan, database, jaringan, perangkat lunak) melalui internet. Teknologi ini memberikan fleksibilitas, skalabilitas, dan efisiensi biaya yang tinggi bagi organisasi.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">💡</span>
+                        <h3>Karakteristik Utama</h3>
+                        <p>On-demand self-service, broad network access, resource pooling, rapid elasticity, dan measured service. Kelima karakteristik ini membuat cloud computing menjadi solusi IT yang revolusioner untuk berbagai kebutuhan bisnis modern.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔧</span>
+                        <h3>Teknologi Pendukung</h3>
+                        <p>Virtualisasi, container, microservices, API, dan software-defined networking menjadi fondasi teknologi cloud computing. Kombinasi teknologi ini memungkinkan delivery layanan yang cepat dan reliable.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cloud-types" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🏢</span>
+                        <h3>Private Cloud</h3>
+                        <p>Infrastruktur cloud yang didedikasikan untuk satu organisasi. Memberikan kontrol penuh, keamanan tinggi, dan customization maksimal. Cocok untuk organisasi dengan kebutuhan compliance yang ketat dan data sensitif.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🌍</span>
+                        <h3>Public Cloud</h3>
+                        <p>Layanan cloud yang tersedia untuk umum dan dikelola oleh penyedia layanan. Menawarkan biaya rendah, skalabilitas tinggi, dan maintenance yang minimal. Ideal untuk startup dan aplikasi dengan beban kerja variable.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔄</span>
+                        <h3>Hybrid Cloud</h3>
+                        <p>Kombinasi private dan public cloud yang terintegrasi. Memungkinkan data dan aplikasi berpindah antara kedua environment. Memberikan fleksibilitas maksimal dan optimasi biaya sesuai kebutuhan.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cloud-services" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🏗️</span>
+                        <h3>IaaS (Infrastructure as a Service)</h3>
+                        <p>Menyediakan infrastruktur IT dasar seperti virtual machines, storage, dan networking. Contoh: Amazon EC2, Google Compute Engine. Memberikan kontrol penuh atas OS dan aplikasi yang dijalankan.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">⚙️</span>
+                        <h3>PaaS (Platform as a Service)</h3>
+                        <p>Menyediakan platform development dan deployment aplikasi. Contoh: Google App Engine, Microsoft Azure App Service. Memungkinkan developer fokus pada kode tanpa memikirkan infrastruktur underlying.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">📱</span>
+                        <h3>SaaS (Software as a Service)</h3>
+                        <p>Menyediakan aplikasi siap pakai melalui internet. Contoh: Gmail, Microsoft 365, Salesforce. Users dapat langsung menggunakan aplikasi tanpa instalasi dan maintenance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cloud-benefits" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">💰</span>
+                        <h3>Cost Efficiency</h3>
+                        <p>Mengurangi CAPEX dan OPEX dengan model pay-as-you-use. Eliminasi biaya hardware, maintenance, dan upgrade. ROI yang lebih baik dengan predictable monthly costs dan reduced total cost of ownership.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">📈</span>
+                        <h3>Scalability & Flexibility</h3>
+                        <p>Auto-scaling berdasarkan demand, global reach, dan rapid deployment. Kemampuan untuk scale up/down resources sesuai kebutuhan bisnis. Support untuk berbagai teknologi dan framework modern.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔒</span>
+                        <h3>Security & Reliability</h3>
+                        <p>Enterprise-grade security, automated backups, dan disaster recovery. Compliance dengan berbagai standar industri. High availability dengan SLA hingga 99.99% uptime guarantee.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Section -->
+        <section id="ai" class="section">
+            <h2>🤖 Artificial Intelligence</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('ai-overview')">Overview</button>
+                <button class="tab-btn" onclick="showTab('ai-types')">Jenis AI</button>
+                <button class="tab-btn" onclick="showTab('ai-applications')">Aplikasi</button>
+                <button class="tab-btn" onclick="showTab('ai-future')">Masa Depan</button>
+            </div>
+
+            <div id="ai-overview" class="tab-content active">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🧠</span>
+                        <h3>Definisi AI</h3>
+                        <p>Artificial Intelligence adalah teknologi yang memungkinkan mesin untuk meniru kecerdasan manusia dalam berpikir, belajar, dan mengambil keputusan. AI mencakup machine learning, deep learning, natural language processing, dan computer vision.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">⚡</span>
+                        <h3>Machine Learning</h3>
+                        <p>Subset dari AI yang memungkinkan sistem belajar dan improve dari pengalaman tanpa explicit programming. Menggunakan algoritma untuk mengidentifikasi pattern dalam data dan membuat prediksi akurat.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔍</span>
+                        <h3>Deep Learning</h3>
+                        <p>Teknik machine learning yang menggunakan neural networks dengan multiple layers. Mampu memproses data kompleks seperti gambar, suara, dan teks dengan akurasi tinggi yang menyerupai kemampuan manusia.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ai-types" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🎯</span>
+                        <h3>Narrow AI (Weak AI)</h3>
+                        <p>AI yang dirancang untuk tugas spesifik seperti voice assistants, recommendation systems, atau image recognition. Saat ini paling banyak digunakan dalam aplikasi komersial dan consumer products.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🌟</span>
+                        <h3>General AI (Strong AI)</h3>
+                        <p>AI teoritis yang memiliki kemampuan kognitif setara manusia dalam semua domain. Dapat berpikir, belajar, dan beradaptasi seperti manusia. Masih dalam tahap penelitian dan development.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🚀</span>
+                        <h3>Superintelligence</h3>
+                        <p>AI hipotetis yang melampaui kecerdasan manusia dalam semua aspek. Konsep futuristik yang menjadi fokus diskusi tentang AI safety dan ethical considerations dalam development teknologi AI.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ai-applications" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🏥</span>
+                        <h3>Healthcare</h3>
+                        <p>Medical imaging analysis, drug discovery, personalized treatment, dan diagnostic assistance. AI membantu dokter membuat diagnosis lebih akurat dan cepat, serta mengembangkan terapi yang lebih efektif.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🚗</span>
+                        <h3>Transportation</h3>
+                        <p>Autonomous vehicles, traffic optimization, predictive maintenance, dan smart logistics. AI mengoptimalkan route planning, meningkatkan safety, dan mengurangi konsumsi energi dalam transportasi.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">💼</span>
+                        <h3>Business & Finance</h3>
+                        <p>Fraud detection, algorithmic trading, customer service chatbots, dan risk assessment. AI membantu otomatisasi proses bisnis, analisis data, dan pengambilan keputusan yang lebih informed.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ai-future" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🔮</span>
+                        <h3>AI Ethics & Governance</h3>
+                        <p>Pengembangan framework etika, regulasi AI, dan responsible AI practices. Focus pada fairness, transparency, accountability, dan privacy protection dalam implementasi teknologi AI.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🤝</span>
+                        <h3>Human-AI Collaboration</h3>
+                        <p>Augmented intelligence yang menggabungkan kekuatan manusia dan AI. AI sebagai tool untuk enhance human capabilities rather than replacement, creating more productive dan creative workflows.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🌐</span>
+                        <h3>AI Democratization</h3>
+                        <p>Making AI accessible untuk semua melalui low-code/no-code platforms, cloud-based AI services, dan educational initiatives. Enables innovation di semua sektor dan level organisasi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blockchain Section -->
+        <section id="blockchain" class="section">
+            <h2>⛓️ Blockchain Technology</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('blockchain-overview')">Overview</button>
+                <button class="tab-btn" onclick="showTab('blockchain-types')">Jenis Blockchain</button>
+                <button class="tab-btn" onclick="showTab('blockchain-applications')">Aplikasi</button>
+                <button class="tab-btn" onclick="showTab('blockchain-future')">Masa Depan</button>
+            </div>
+
+            <div id="blockchain-overview" class="tab-content active">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🔗</span>
+                        <h3>Definisi Blockchain</h3>
+                        <p>Blockchain adalah distributed ledger technology yang mencatat transaksi dalam blocks yang saling terhubung dan secured menggunakan cryptography. Setiap block berisi cryptographic hash dari block sebelumnya, timestamp, dan transaction data.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔐</span>
+                        <h3>Karakteristik Utama</h3>
+                        <p>Decentralization, transparency, immutability, dan consensus mechanism. Tidak ada single point of failure, semua transaksi dapat diverifikasi, dan data tidak dapat diubah setelah dikonfirmasi oleh network.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">⚙️</span>
+                        <h3>Cara Kerja</h3>
+                        <p>Setiap transaksi diverifikasi oleh network nodes, dikumpulkan dalam block, dan ditambahkan ke chain setelah mencapai consensus. Mining atau staking digunakan untuk validate transactions dan maintain network security.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="blockchain-types" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">🌍</span>
+                        <h3>Public Blockchain</h3>
+                        <p>Completely decentralized dan open untuk siapa saja. Contoh: Bitcoin, Ethereum. Memberikan transparansi maksimal dan censorship resistance, namun memiliki scalability limitations dan energy consumption yang tinggi.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🏢</span>
+                        <h3>Private Blockchain</h3>
+                        <p>Controlled oleh single organization dengan restricted access. Memberikan privacy, faster transactions, dan regulatory compliance. Cocok untuk enterprise applications yang membutuhkan kontrol dan efficiency.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🤝</span>
+                        <h3>Consortium Blockchain</h3>
+                        <p>Semi-decentralized dengan control oleh group of organizations. Balanced approach antara transparency dan privacy. Ideal untuk industry collaborations dan multi-party business processes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="blockchain-applications" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">💰</span>
+                        <h3>Cryptocurrency & DeFi</h3>
+                        <p>Digital currencies, decentralized exchanges, lending protocols, dan yield farming. Memungkinkan financial services tanpa traditional intermediaries, providing global access dan programmable money.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">📋</span>
+                        <h3>Supply Chain Management</h3>
+                        <p>Product traceability, authenticity verification, dan transparent logistics. Consumers dapat track product journey dari manufacturer hingga end user, ensuring quality dan ethical sourcing.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🗳️</span>
+                        <h3>Digital Identity & Voting</h3>
+                        <p>Self-sovereign identity, secure voting systems, dan credential verification. Blockchain memungkinkan identity management yang secure dan voting yang transparent tanpa compromising privacy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="blockchain-future" class="tab-content">
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">⚡</span>
+                        <h3>Scalability Solutions</h3>
+                        <p>Layer 2 solutions, sharding, dan interoperability protocols. Teknologi seperti Lightning Network, Polygon, dan Cosmos Chain memungkinkan blockchain processing thousands of transactions per second.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🌱</span>
+                        <h3>Sustainability</h3>
+                        <p>Transition dari Proof of Work ke Proof of Stake dan green blockchain initiatives. Focus pada energy efficiency dan carbon neutrality dalam blockchain operations dan development.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🏛️</span>
+                        <h3>Regulation & Adoption</h3>
+                        <p>Government adoption, regulatory frameworks, dan institutional integration. Central Bank Digital Currencies (CBDCs) dan regulatory clarity akan drive mainstream blockchain adoption.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechHub</h3>
+                    <p>Platform edukasi teknologi terdepan untuk cloud computing, artificial intelligence, dan blockchain technology.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#cloud" onclick="scrollToSection('cloud')">Cloud Computing</a>
+                    <a href="#ai" onclick="scrollToSection('ai')">Artificial Intelligence</a>
+                    <a href="#blockchain" onclick="scrollToSection('blockchain')">Blockchain</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="#">Tutorial</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">Case Studies</a>
+                    <a href="#">Best Practices</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <a href="mailto:info@techhub.com">info@techhub.com</a>
+                    <a href="tel:+62123456789">+62 123 456 789</a>
+                    <p>Jakarta, Indonesia</p>
+                </div>
+            </div>
+            <hr style="border-color: #555; margin: 2rem 0;">
+            <p>&copy; 2025 TechHub. All rights reserved. | Powered by Modern Web Technologies</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            const headerOffset = 80;
+            const elementPosition = element.offsetTop;
+            const offsetPosition = elementPosition - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Tab functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Search functionality
+        function searchContent() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            let hasResults = false;
+
+            cards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                const cardElement = card.parentElement;
+                
+                if (cardText.includes(searchTerm) || searchTerm === '') {
+                    card.style.display = 'block';
+                    card.style.opacity = '1';
+                    hasResults = true;
+                } else {
+                    card.style.display = 'none';
+                    card.style.opacity = '0.5';
+                }
+            });
+
+            // Show search results indicator
+            updateSearchResults(hasResults, searchTerm);
+        }
+
+        function updateSearchResults(hasResults, searchTerm) {
+            let indicator = document.getElementById('searchIndicator');
+            
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.id = 'searchIndicator';
+                indicator.style.textAlign = 'center';
+                indicator.style.margin = '1rem 0';
+                indicator.style.padding = '1rem';
+                indicator.style.borderRadius = '10px';
+                indicator.style.fontWeight = '600';
+                document.querySelector('.search-container').appendChild(indicator);
+            }
+
+            if (searchTerm === '') {
+                indicator.style.display = 'none';
+            } else if (hasResults) {
+                indicator.style.display = 'block';
+                indicator.style.background = 'linear-gradient(45deg, #4ecdc4, #44a08d)';
+                indicator.style.color = 'white';
+                indicator.innerHTML = `✅ Menampilkan hasil pencarian untuk: "<strong>${searchTerm}</strong>"`;
+            } else {
+                indicator.style.display = 'block';
+                indicator.style.background = 'linear-gradient(45deg, #ff6b6b, #ee5a52)';
+                indicator.style.color = 'white';
+                indicator.innerHTML = `❌ Tidak ada hasil untuk: "<strong>${searchTerm}</strong>"`;
+            }
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+                header.style.backdropFilter = 'blur(10px)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            const sections = document.querySelectorAll('.section');
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Mobile menu toggle (if needed)
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('mobile-active');
+        }
+
+        // Add mobile menu styles
+        const mobileStyles = `
+            @media (max-width: 768px) {
+                .nav-links.mobile-active {
+                    display: flex;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(20px);
+                    padding: 1rem;
+                    border-radius: 0 0 15px 15px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                }
+                
+                .nav-links.mobile-active a {
+                    color: #333;
+                    padding: 0.5rem 0;
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                }
+                
+                .mobile-menu-btn {
+                    display: block;
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+            }
+        `;
+
+        // Add mobile styles to head
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = mobileStyles;
+        document.head.appendChild(styleSheet);
+
+        // Add mobile menu button
+        window.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('nav');
+            const mobileBtn = document.createElement('button');
+            mobileBtn.className = 'mobile-menu-btn';
+            mobileBtn.innerHTML = '☰';
+            mobileBtn.onclick = toggleMobileMenu;
+            mobileBtn.style.display = 'none';
+            nav.appendChild(mobileBtn);
+
+            // Show mobile button on small screens
+            function checkScreenSize() {
+                if (window.innerWidth <= 768) {
+                    mobileBtn.style.display = 'block';
+                } else {
+                    mobileBtn.style.display = 'none';
+                    document.querySelector('.nav-links').classList.remove('mobile-active');
+                }
+            }
+
+            window.addEventListener('resize', checkScreenSize);
+            checkScreenSize();
+        });
+
+        // Lazy loading for better performance
+        function lazyLoadContent() {
+            const images = document.querySelectorAll('img[data-src]');
+            
+            images.forEach(img => {
+                if (img.getBoundingClientRect().top < window.innerHeight) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', lazyLoadContent);
+
+        // Performance optimization
+        let ticking = false;
+        function updateOnScroll() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    // Any scroll-based updates here
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', updateOnScroll);
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add click effect to buttons
+            const buttons = document.querySelectorAll('.btn, .tab-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255,255,255,0.3)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'ripple 0.6s linear';
+                    ripple.style.pointerEvents = 'none';
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+
+        // Add ripple animation
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Console welcome message
+        console.log(`
+        🚀 Selamat datang di TechHub!
+        
+        Website ini dibuat dengan teknologi modern:
+        ✅ HTML5 & CSS3
+        ✅ Vanilla JavaScript
+        ✅ Responsive Design
+        ✅ Smooth Animations
+        ✅ Interactive Elements
+        
+        Jelajahi konten tentang:
+        ☁️  Cloud Computing
+        🤖 Artificial Intelligence  
+        ⛓️  Blockchain Technology
+        
+        Happy exploring! 🎉
+        `);
+    </script>
+</body>
+</html>
